@@ -21,7 +21,7 @@ class obj:
 		self.name=x
 		self.num=n
 		self.price=p
-def change(x):
+def change(x,number):
 	ob=[]	
 	try:
 		A=open("Inventory.csv","r")
@@ -29,7 +29,7 @@ def change(x):
 		for i in l:
 			i=i.split(",");
 			if i[0]==x:
-				i[1]=int(i[1])-1;
+				i[1]=int(i[1])-int(number);
 			ob.append(obj(i[0],i[1],i[2].strip()))
 	except IOError:
 		print "IOerror"
@@ -42,20 +42,20 @@ def change(x):
 		A.write("\n")
 	A.close()
 
-def loggedin(username):#reorder
+def loggedin(username):
 	try:
-		name=open("LoggedIn.csv","r")#Loggedin spelling mistake
-		for line in name.readlines():#remove \n
+		name=open("LoggedIn.csv","r")
+		for line in name.readlines():
 			if line.strip() == username:
-				return "1"#retun spelling misstake
-		return "0" #same
+				return "1"
+		return "0" 
 		name.close()
 	except IOError:
 		print "Oops!LoggedIn.csv Missing"
+
+
 # Get data from fields
 
-
-	                      
 username = form.getvalue('username')
 
 mc = form.getvalue('mercury')
@@ -64,12 +64,19 @@ ms = form.getvalue('mars')
 jp = form.getvalue('jupiter')
 st = form.getvalue('saturn')
 
-num = form.getlist("num")       #new added to read num from <text>
+num1 = form.getvalue('num1')
+num2 = form.getvalue('num2')	
+num3 = form.getvalue('num3')
+num4 = form.getvalue('num4')
+num5 = form.getvalue('num5')
+
+
 total = 0
 
 
 list1 = [mc,vn,ms,jp,st];
 list2 = ['Mercury','Venus','Mars','Jupiter','Saturn'];
+list3 = [num1,num2,num3,num4,num5]
 
 if loggedin(username) == "0":
 	print "<p>You are not logged in.</p>"
@@ -78,26 +85,34 @@ if loggedin(username) == "0":
 else:
 	quantity = open("Inventory.csv","r")
 
-	for i in range(0,5):
-		if list1[i] == "0":
-			if num[i] > "1":
-				print "<p>Sorry,We don't have so much stocks</p>"
+	
+	
+	
+	for i in range(5):
+		l=quantity.readline()
+		l=l.split(",");
+		
+		if list1[i] == '0':
+			if l[1] < "1":
+				print "<br><center>%s Sold Out<center>"%(list2[i])
+			
 			else:
-				if num[i] == "1":
-					l=quantity.readline()
-					l=l.split(",");
-					if l[1] < "1":
-						print "<br>Sold Out"
+				if l[1] >= "1":
+					if list3[i] > l[1]:
+						print "<p><center>Sorry,We don't have so much stocks for %s</center></p>"%(list2[i])
 					else:
-						if l[1] == "1":
-							print "<p>Iterm name:%s</p>",list2[i]
-							print "<p>Iterm quantity:%s</p>",num[i]
-							print "<p>Iterm price:%f</p>",l[2]
-							change(list2[i])
-							total = total + int(l[2])
-	print "<br>The total amount is %f",total
+						if list3[i] >= "1":
+							
+							print "<p><center>Iterm name:%s</center></p>"%(list2[i])
+							print "<p><center>Iterm quantity:%s</center></p>"%(list3[i])
+							print "<p><center>Iterm price:$%s</center></p>"%(l[2])
+							change(list2[i],list3[i])
+							total = total + int(l[2])*int(list3[i])
+	quantity.close()
+	
+	print "<p><center>The total amount is $%d.</center></p>"%(total)
 	print "<p style=\"line-height: 80px;\">"
-	print "<a href=\"http://www.cs.mcgill.ca/~yxia18/store/home.html\">HOME</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href=\"http://www.cs.mcgill.ca/~yxia18/store/catalogue.html\">CATALOGUE</a>"
+	print "<center><a href=\"http://www.cs.mcgill.ca/~yxia18/store/home.html\">HOME</a></center>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<center><a href=\"http://www.cs.mcgill.ca/~yxia18/store/catalogue.html\">CATALOGUE</a></center>"
 	print "</p>"
 	print "</body></html>"
 	
