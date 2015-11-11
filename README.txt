@@ -1,3 +1,5 @@
-Michael Coppinger 260570190 home.html,registration.html,Perl.pl
-Yue Xia 260556275 login.html,login.c
-Zhaoqi Xu 260563752 Purchase.py,catalogue.html
+this link "http://cs.mcgill.ca/~yxia18/store/home"
+cooperators:
+Michael Coppinger home.html,registration.html,Perl.pl
+Yue Xia login.html,login.c
+Zhaoqi Xu Purchase.py,catalogue.html
