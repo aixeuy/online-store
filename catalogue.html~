@@ -28,7 +28,7 @@
     
     <form action="Purchase.py" method="get">
     <p>
-    <input type="hidden" name="username" @ >
+    <input type="hidden" name="username" value="xy" >
       <table align="center" width="900" height="1500"  border="4">
 	<tr>
 	   <th>Catalogue</th>

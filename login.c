@@ -80,8 +80,8 @@ fclose(mb);
 printf("Content-Type:text/html\n\n");
 if(isvalid==0){
  printf("<html><head><title>program</title></head><body><h1>password not valid</h1>");
- printf("<br><a href=\"http://www.cs.mcgill.ca/~yxia18/home.html\">home</a>");
- printf("<br><a href=\"http://www.cs.mcgill.ca/~yxia18/login.html\">login</a>");
+ printf("<br><a href=\"http://www.cs.mcgill.ca/~yxia18/store/home.html\">home</a>");
+ printf("<br><a href=\"http://www.cs.mcgill.ca/~yxia18/store/login.html\">login</a>");
  printf("</body></html>");
 }
 else{
